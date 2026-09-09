@@ -4,7 +4,29 @@ A focused, responsive employee attendance workspace for Code Origin.ai Private L
 
 ## Run locally
 
+This project pins the Vite toolchain to versions that support Node 20.15.1. It intentionally avoids the newer Vite/Rolldown packages, which require Node 20.19+ and can fail on Windows when npm skips an optional native binding.
+
 ```bash
+npm install
+npm run dev
+```
+
+If you already ran `npm install` with an older version of this repository, remove the generated dependency tree and lockfile once before reinstalling:
+
+**PowerShell**
+
+```powershell
+Remove-Item -Recurse -Force node_modules
+Remove-Item -Force package-lock.json -ErrorAction SilentlyContinue
+npm install
+npm run dev
+```
+
+**Command Prompt**
+
+```bat
+rmdir /s /q node_modules
+if exist package-lock.json del package-lock.json
 npm install
 npm run dev
 ```
