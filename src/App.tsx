@@ -252,6 +252,11 @@ function App() {
         body: JSON.stringify({ email: HR_EMAIL, password }),
       })
       authenticated = response.ok
+      if (response.status === 404) {
+        // Vite does not serve serverless API routes locally; keep the documented demo fallback
+        // only when the auth endpoint is unavailable. A deployed 401 response never falls back.
+        authenticated = password === 'Origin@2026!'
+      }
     } catch {
       // The static preview keeps a clearly documented demo fallback until an auth API is deployed.
       authenticated = password === 'Origin@2026!'
